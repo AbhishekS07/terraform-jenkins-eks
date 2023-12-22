@@ -30,18 +30,28 @@ sudo systemctl start jenkins
 sudo apt install -y git
 
 # Install Terraform
-sudo apt install gnupg -y
-sudo apt-get update && sudo apt-get install -y gnupg software-properties-common
-wget -O- https://apt.releases.hashicorp.com/gpg | \
-gpg --dearmor | \
-sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
-echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] \
-https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
-sudo tee /etc/apt/sources.list.d/hashicorp.list
-sudo apt update
-sudo apt-get install terraform
-sudo systemctl enable terraform
-sudo systemctl restart terraform
+#!/bin/bash
+
+# Update the package repositories
+sudo apt update -y
+
+# Install unzip if not already installed
+sudo apt install unzip  -y
+
+# Download the latest version of Terraform
+TERRAFORM_VERSION=$(curl -s https://api.github.com/repos/hashicorp/terraform/releases/latest | grep tag_name | cut -d '"' -f 4)
+wget https://releases.hashicorp.com/terraform/${TERRAFORM_VERSION}/terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+
+# Unzip the downloaded file and move it to the /usr/local/bin directory
+unzip terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+sudo mv terraform /usr/local/bin/
+
+# Clean up downloaded files
+rm terraform_${TERRAFORM_VERSION}_linux_amd64.zip
+
+# Verify the installation
+terraform --version
+
 
 # Install kubectl
 #sudo curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.23.6/bin/linux/amd64/kubectl

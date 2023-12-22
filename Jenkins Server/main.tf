@@ -46,7 +46,7 @@ module "sg" {
       description = "HTTP"
       cidr_blocks = "0.0.0.0/0"
     },
-      {
+    {
       from_port   = 22
       to_port     = 22
       protocol    = "tcp"
@@ -71,10 +71,10 @@ module "sg" {
 module "ec2_instance" {
   source = "terraform-aws-modules/ec2-instance/aws"
 
-  name = "Terraform-Master"
-  ami = "ami-0da7657fe73215c0c"
+  name                        = "Terraform-Master"
+  ami                         = "ami-0da7657fe73215c0c"
   instance_type               = var.instance_type
-  key_name                    = "Terraform-Master-key"
+  key_name                    = "jenkins-server-key"
   monitoring                  = true
   vpc_security_group_ids      = [module.sg.security_group_id]
   subnet_id                   = module.vpc.public_subnets[0]
