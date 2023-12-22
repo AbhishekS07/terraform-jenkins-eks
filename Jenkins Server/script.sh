@@ -40,6 +40,8 @@ https://apt.releases.hashicorp.com $(lsb_release -cs) main" | \
 sudo tee /etc/apt/sources.list.d/hashicorp.list
 sudo apt update
 sudo apt-get install terraform
+sudo systemctl enable terraform
+sudo systemctl restart terraform
 
 # Install kubectl
 #sudo curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.23.6/bin/linux/amd64/kubectl
