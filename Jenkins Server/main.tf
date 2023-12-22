@@ -46,6 +46,13 @@ module "sg" {
       description = "HTTP"
       cidr_blocks = "0.0.0.0/0"
     },
+      {
+      from_port   = 22
+      to_port     = 22
+      protocol    = "tcp"
+      description = "SSH"
+      cidr_blocks = "0.0.0.0/0"
+    }
   ]
 
   egress_with_cidr_blocks = [
@@ -64,10 +71,10 @@ module "sg" {
 module "ec2_instance" {
   source = "terraform-aws-modules/ec2-instance/aws"
 
-  name = "Jenkins-Server"
+  name = "Terraform-Master"
   ami = "ami-0da7657fe73215c0c"
   instance_type               = var.instance_type
-  key_name                    = "jenkins-server-key"
+  key_name                    = "Terraform-Master-key"
   monitoring                  = true
   vpc_security_group_ids      = [module.sg.security_group_id]
   subnet_id                   = module.vpc.public_subnets[0]
@@ -76,7 +83,7 @@ module "ec2_instance" {
   availability_zone           = data.aws_availability_zones.azs.names[0]
 
   tags = {
-    Name        = "Jenkins-Server"
+    Name        = "Terraform-Master"
     Terraform   = "true"
     Environment = "dev"
   }
