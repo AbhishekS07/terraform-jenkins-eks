@@ -46,13 +46,6 @@ module "sg" {
       description = "HTTP"
       cidr_blocks = "0.0.0.0/0"
     },
-    {
-      from_port   = 8888
-      to_port     = 8888
-      protocol    = "tcp"
-      description = "HTTP"
-      cidr_blocks = "0.0.0.0/0"
-    },
   ]
 
   egress_with_cidr_blocks = [
