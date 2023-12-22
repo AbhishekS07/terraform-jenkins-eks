@@ -8,6 +8,6 @@ variable "public_subnets" {
   type        = list(string)
 }
 variable "private_subnets" {
-    description = "Subnets CIDR"
-    type        = list(string)
+  description = "Subnets CIDR"
+  type        = list(string)
 }
