@@ -47,10 +47,10 @@ module "sg" {
       cidr_blocks = "0.0.0.0/0"
     },
     {
-      from_port   = 22
-      to_port     = 22
+      from_port   = 8888
+      to_port     = 8888
       protocol    = "tcp"
-      description = "SSH"
+      description = "HTTP"
       cidr_blocks = "0.0.0.0/0"
     },
   ]
