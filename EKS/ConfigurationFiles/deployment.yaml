@@ -1,26 +1,27 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-app-deployment
+  name: nginx
 spec:
-  replicas: 3  # Adjust the number of replicas as needed
   selector:
     matchLabels:
-      app: web-app
+      app: nginx
+  replicas: 3
   template:
     metadata:
       labels:
-        app: web-app
+        app: nginx
     spec:
       containers:
-      - name: web-app
-        image: nginx:latest
+      - name: nginx
+        image: nginx
         ports:
         - containerPort: 80
         volumeMounts:
-        - name: web-app-files
+        - name: index
           mountPath: /usr/share/nginx/html
   volumes:
-  - name: web-app-files
+  - name: nginx-html
     configMap:
-      name: web-app
+      name: nginx-html
+      
