@@ -1,8 +1,5 @@
 #!/bin/bash
 sudo apt update
-sudo apt install -y nginx
-sudo systemctl enable nginx
-sudo systemctl start nginx
 
 #Java installaion
 sudo apt update
@@ -31,6 +28,7 @@ sudo systemctl start jenkins
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 sudo apt install unzip
 unzip awscliv2.zip
+sudo apt install -y awscli
 
 # Install Git
 sudo apt install -y git
