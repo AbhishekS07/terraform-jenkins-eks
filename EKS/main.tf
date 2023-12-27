@@ -2,7 +2,7 @@
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
-  name = "jenkins-vpc"
+  name = "eks-vpc"
   cidr = var.vpc_cidr
 
   azs                     = data.aws_availability_zones.azs.names
@@ -43,7 +43,7 @@ module "eks" {
     node = {
       min_size      = 1
       max_size      = 5
-      desired_size  = 4
+      desired_size  = 3
       instance_type = ["t2.small"]
     }
   }
